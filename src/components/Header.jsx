@@ -10,7 +10,9 @@ import {
 } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
-import DarkMode from '@mui/icons-material/DarkMode';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import { useTheme } from '../components/ThemeProvider';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -44,16 +46,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   width: '100%',
   padding: theme.spacing(1, 2, 1, 2),
-  paddingRight: `calc(1em + ${theme.spacing(4)})`, // Room for search icon
+  paddingRight: `calc(1em + ${theme.spacing(4)})`,
 }));
 
 export default function Header() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <AppBar position="static" color="default" elevation={1}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        {/* Left: Logo and Home */}
         <Box display="flex" alignItems="center">
-          <Typography variant="h6" color="inherit" noWrap sx={{ mr: 2 }}>
+          <Typography variant="h6" noWrap sx={{ mr: 2 }}>
             Movie Explorer
           </Typography>
           <Button color="inherit" sx={{ textTransform: 'none' }}>
@@ -61,7 +64,6 @@ export default function Header() {
           </Button>
         </Box>
 
-        {/* Middle: Search */}
         <Search>
           <StyledInputBase placeholder="Search movies..." />
           <SearchIconWrapper>
@@ -69,10 +71,9 @@ export default function Header() {
           </SearchIconWrapper>
         </Search>
 
-        {/* Right: Dark Mode + Login */}
         <Box display="flex" alignItems="center" gap={1}>
-          <IconButton>
-            <DarkMode />
+          <IconButton onClick={toggleTheme} color="inherit">
+            {theme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
           <Button variant="outlined" sx={{ textTransform: 'none' }}>
             Login

@@ -14,6 +14,7 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import { useTheme } from "../components/ThemeProvider";
 import { Link } from "react-router-dom";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -84,6 +85,9 @@ export default function Header() {
         </Search>
 
         <Box display="flex" alignItems="center" gap={1}>
+          <IconButton component={Link} to="/favorites" color="inherit">
+            <FavoriteIcon />
+          </IconButton>
           <IconButton onClick={toggleTheme} color="inherit">
             {theme === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function MovieCard({ movie }) {
   const navigate = useNavigate();
-  
+
   const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   const year = movie.release_date ? new Date(movie.release_date).getFullYear() : 'N/A';
   const rating = movie.vote_average?.toFixed(1) || 'N/A';
@@ -39,7 +39,6 @@ export default function MovieCard({ movie }) {
           {movie.title}
         </Typography>
         <Box display="flex" alignItems="center" gap={1} mt={1}>
-          {/* Display genre */}
           <Chip label={genre} color="primary" size="small" />
           <Typography variant="body2" color="text.secondary">
             {year}

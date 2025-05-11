@@ -1,5 +1,3 @@
-// src/components/MovieExplorer.jsx
-
 import React, { useEffect, useState } from 'react';
 import {
   Grid,
@@ -30,7 +28,7 @@ const MovieExplorer = () => {
     const loadGenres = async () => {
       try {
         const genreData = await fetchGenres();
-        setGenres(genreData.genres); // ✅ FIXED
+        setGenres(genreData.genres);
       } catch (err) {
         console.error(err);
       }
@@ -52,7 +50,8 @@ const MovieExplorer = () => {
 
         const moviesWithGenres = newMovies.map(movie => ({
           ...movie,
-          genre_names: movie.genre_ids.map(id => genreMap[id]).filter(Boolean)
+          genre_names: movie.genre_ids?.map(id => genreMap[id]).filter(Boolean) || [],
+          genre_ids: movie.genre_ids || [] 
         }));
 
         setMovies(prev => [...prev, ...moviesWithGenres]);
@@ -63,7 +62,7 @@ const MovieExplorer = () => {
       }
     };
 
-    if (genres.length > 0) loadMovies(); // Prevents running before genres are fetched
+    if (genres.length > 0) loadMovies();
   }, [page, genres]);
 
   const handleLoadMore = () => {
@@ -72,7 +71,7 @@ const MovieExplorer = () => {
 
   const filteredMovies = movies.filter(movie => {
     const matchGenre = selectedGenre ? movie.genre_ids.includes(Number(selectedGenre)) : true;
-    const matchYear = selectedYear ? movie.release_date?.startsWith(selectedYear) : true;
+    const matchYear = selectedYear ? movie.release_date?.slice(0, 4) === selectedYear : true;
     return matchGenre && matchYear;
   });
 

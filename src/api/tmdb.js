@@ -19,3 +19,11 @@ export const fetchGenres = async () => {
   if (!response.ok) throw new Error('Failed to fetch genres');
   return await response.json();
 };
+
+export const searchMovies = async (query) => {
+  const response = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(query)}&page=1&include_adult=false`);
+  if (!response.ok) throw new Error('Failed to search movies');
+  const data = await response.json();
+  return data.results;
+};
+

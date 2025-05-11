@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -13,7 +13,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import { useTheme } from "../components/ThemeProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom"; // Added useNavigate
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const Search = styled("div")(({ theme }) => ({
@@ -53,6 +53,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  if (location.pathname === "/sign-in") return null;
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter" && searchQuery.trim()) {
+      navigate(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
 
   return (
     <AppBar position="static" color="default" elevation={1}>
@@ -78,7 +89,12 @@ export default function Header() {
         </Box>
 
         <Search>
-          <StyledInputBase placeholder="Search movies..." />
+          <StyledInputBase
+            placeholder="Search movies..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleSearch}
+          />
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
@@ -91,7 +107,7 @@ export default function Header() {
           <IconButton onClick={toggleTheme} color="inherit">
             {theme === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
-          <Button variant="outlined" sx={{ textTransform: "none" }}>
+          <Button component={Link} to="/sign-in" variant="outlined" sx={{ textTransform: "none" }}>
             Login
           </Button>
         </Box>

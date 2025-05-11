@@ -1,16 +1,22 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Chip, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function MovieCard({ movie }) {
+  const navigate = useNavigate();
+  
   const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   const year = movie.release_date ? new Date(movie.release_date).getFullYear() : 'N/A';
   const rating = movie.vote_average?.toFixed(1) || 'N/A';
-
-
   const genre = movie.genres?.[0]?.name || movie.genre_names?.[0] || 'Genre'; 
+
+  const handleClick = () => {
+    navigate(`/movies/${movie.id}`);
+  };
 
   return (
     <Card
+      onClick={handleClick}
       sx={{
         width: 240,
         borderRadius: 2,

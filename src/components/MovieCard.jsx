@@ -5,7 +5,9 @@ export default function MovieCard({ movie }) {
   const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   const year = movie.release_date ? new Date(movie.release_date).getFullYear() : 'N/A';
   const rating = movie.vote_average?.toFixed(1) || 'N/A';
-  const genre = movie.genre_names?.[0] || 'Genre';
+
+
+  const genre = movie.genres?.[0]?.name || movie.genre_names?.[0] || 'Genre'; 
 
   return (
     <Card
@@ -31,7 +33,8 @@ export default function MovieCard({ movie }) {
           {movie.title}
         </Typography>
         <Box display="flex" alignItems="center" gap={1} mt={1}>
-          <Chip label={genre} size="small" />
+          {/* Display genre */}
+          <Chip label={genre} color="primary" size="small" />
           <Typography variant="body2" color="text.secondary">
             {year}
           </Typography>

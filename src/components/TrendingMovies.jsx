@@ -15,6 +15,7 @@ export default function TrendingMovies() {
   useEffect(() => {
     const loadMovies = async () => {
       const data = await fetchPopularMovies();
+      console.log(data); // Log the data to inspect the structure
       setMovies(data);
     };
     loadMovies();

@@ -3,6 +3,7 @@ import HeroSection from "../components/HeroSection";
 import TrendingMovies from "../components/TrendingMovies";
 import { fetchPopularMovies } from "../api/tmdb";
 import { Grid, Container, Typography } from "@mui/material";
+import MovieExplorer from "../components/MovieExplorer";
 
 export default function Home() {
   const [movies, setMovies] = useState([]);
@@ -34,6 +35,9 @@ export default function Home() {
         <Grid container spacing={4} direction="column">
           <Grid item sx={{ ml: -10 }}>
             <TrendingMovies movies={movies.slice(0, 5)} />
+          </Grid>
+          <Grid>
+            <MovieExplorer movies={movies.slice(0, 5)} />
           </Grid>
         </Grid>
       </Container>

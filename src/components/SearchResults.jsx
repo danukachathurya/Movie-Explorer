@@ -27,7 +27,7 @@ const SearchResults = () => {
   }, [query]);
 
   return (
-    <Box p={3}>
+    <Box p={3} sx={{ mt: 4, ml: 15 }}>
       <Typography variant="h5" gutterBottom>
         Search Results for "{query}"
       </Typography>

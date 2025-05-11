@@ -64,7 +64,11 @@ export default function TrendingMovies() {
               bgcolor: 'rgba(0,0,0,0.6)',
               color: 'white',
               zIndex: 2,
-              '&:hover': { bgcolor: 'rgba(0,0,0,0.8)' },
+              transition: 'transform 0.3s ease-in-out',
+              '&:hover': {
+                bgcolor: 'rgba(0,0,0,0.8)',
+                transform: 'scale(1.1)', // Optional: zoom effect on hover
+              },
             }}
           >
             <ArrowBackIosNewIcon />
@@ -105,7 +109,11 @@ export default function TrendingMovies() {
               bgcolor: 'rgba(0,0,0,0.6)',
               color: 'white',
               zIndex: 2,
-              '&:hover': { bgcolor: 'rgba(0,0,0,0.8)' },
+              transition: 'transform 0.3s ease-in-out',
+              '&:hover': {
+                bgcolor: 'rgba(0,0,0,0.8)',
+                transform: 'scale(1.1)',
+              },
             }}
           >
             <ArrowForwardIosIcon />
